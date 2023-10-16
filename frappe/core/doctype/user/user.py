@@ -858,7 +858,7 @@ def verify_password(password):
 
 
 @frappe.whitelist(allow_guest=True)
-def sign_up(email, full_name, redirect_to):
+def sign_up(email, full_name, mobile_no, redirect_to):
 	if is_signup_disabled():
 		frappe.throw(_("Sign Up is disabled"), title=_("Not Allowed"))
 
@@ -884,6 +884,7 @@ def sign_up(email, full_name, redirect_to):
 			{
 				"doctype": "User",
 				"email": email,
+				"mobile_no":mobile_no,
 				"first_name": escape_html(full_name),
 				"enabled": 1,
 				"new_password": random_string(10),
